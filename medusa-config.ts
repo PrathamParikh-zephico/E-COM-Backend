@@ -4,25 +4,22 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: process.env.DATABASE_URL,
+    database_url: process.env.DATABASE_URL,
+    redis_url: process.env.REDIS_URL,
+
     http: {
-      storeCors: process.env.STORE_CORS!,
-      adminCors: process.env.ADMIN_CORS!,
-      authCors: process.env.AUTH_CORS!,
-      jwtSecret: process.env.JWT_SECRET || "supersecret",
-      cookieSecret: process.env.COOKIE_SECRET || "supersecret",
-    }
-  },
-  modules : [
-    {
-    resolve : "./src/modules/lookup"
-    },
-    {
-      resolve : "./src/modules/mapping"
-    },
-    {
-      resolve : "./src/modules/combination"
+      store_cors: process.env.STORE_CORS || "*",
+      admin_cors: process.env.ADMIN_CORS || "*",
+      auth_cors: process.env.AUTH_CORS || "*",
     },
 
-]
+    jwt_secret: process.env.JWT_SECRET || "supersecret",
+    cookie_secret: process.env.COOKIE_SECRET || "supersecret",
+  },
+
+  modules: [
+    { resolve: "./src/modules/lookup" },
+    { resolve: "./src/modules/mapping" },
+    { resolve: "./src/modules/combination" },
+  ],
 })
